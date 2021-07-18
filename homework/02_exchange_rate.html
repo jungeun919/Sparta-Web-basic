@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>2주차과제: 환율API</title>
+
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200&family=Source+Sans+Pro:wght@300&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Mukta', sans-serif;
+        }
+
+        .image {
+            width: 500px;
+            height: 300px;
+            border-radius: 10px;
+            margin: 10px auto 20px auto;
+            display: block;
+        }
+
+        .succulent {
+            width: 500px;
+            margin: auto;
+        }
+
+        span {
+            color: grey;
+            font-size: 20px
+        }
+
+        .rate {
+            color: blue;
+        }
+
+        #now-rate {
+            color: blue;
+        }
+
+        .description {
+            margin-bottom: 10px;
+        }
+
+        .btn-style {
+            color: white;
+            margin: auto;
+            display: block;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            get_rate()
+        });
+
+        function get_rate() {
+            $('#names-q1').empty()
+            $.ajax({
+                type: "GET",
+                url: "https://api.manana.kr/exchange/rate.json",
+                data: {},
+                success: function (response) {
+                    let now_rate = response[1]['rate']
+                    $('#now-rate').text(now_rate)
+                }
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <img class="image"
+         src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/158510331602466965.jpg?gif=1&w=850&h=850&c=c"
+         alt="다육이 화분">
+
+    <div class="succulent">
+        <h1>다육이를 팝니다. <span>가격: 15,000원/개</span></h1>
+        <p class="description">다육이 전용토를 사용! 일반 흙이 아닌 다육이 전용토를 사용해 적합한 환경을 만들어 줌으로 더 건강하고 오래 키울 수 있습니다.
+            농장직판으로 가져오기 때문에 가격은 낮추고 품질이 좋은 상품으로 제공할 수 있게 되었습니다.</p>
+        <p class="rate">달러-원 환율: <span id="now-rate">oooo.oo</span></p>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">주문자 이름</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">수량</label>
+            </div>
+            <select class="custom-select" id="inputGroupSelect01">
+                <option selected>--수량을 선택하세요--</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">주소</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">전화번호</span>
+            </div>
+            <input type="tel" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+
+        <button type="button" onclick="order()" class="btn btn-primary btn-style">주문하기</button>
+    </div>
+</body>
+</html>
